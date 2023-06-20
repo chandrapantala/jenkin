@@ -1,0 +1,42 @@
+@Library('mylibrary')_
+pipeline{
+    agent any
+    stages{
+        stage("download code"){
+            steps{
+                script{
+                    cicd1.newGit("maven")
+                }
+            }
+        }
+        stage("build code"){
+            steps{
+                script{
+                    cicd1.newMaven()
+                }
+            }
+        }
+        stage("deploycode"){
+            steps{
+                script{
+                    cicd1.newDeploy("shareLibrery","172.31.24.127","test08")
+                }
+            }
+        }
+        stage("contesti"){
+            steps{
+                script{
+                    cicd1.newGit("FunctionalTesting")
+                    cicd1.newtest("shareLibrery")
+                }
+            }
+        }
+        stage("delivery"){
+            steps{
+                script{
+                    cicd1.newDeploy("shareLibrery","172.31.19.74","prod1")
+                }
+            }
+        }
+    }
+}

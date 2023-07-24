@@ -1,0 +1,42 @@
+#new item--deployment
+open deployment configure--
+#continoues downloadsing (1st step)
+soure code---> select git
+                      url-copy the code of github intelliqit in maven repositry---save
+build now--->1st step run sucessfully
+#continoues build(2nd step)
+build steps--->select invoke top of maven
+                                    mvn package---save
+buld now---->2nd step run sucessfull
+#continoues deploy(3rd step)
+post build action---> deploy war select
+                                  **/*.war
+                                  testapp
+                                  tomcat9x
+                                  add--user&password of tomcat-users.xml in file
+                                  url--http://qaip:8080---save
+build now---3rd step run sucessfull
+#continoues testing(4th step)
+new item ---testing
+sourece code---select git 
+                      url-copy to github intelliqit in functionaltesting respositry---save
+build now-->4th step sucessfull
+open 4th step consoul output---copy building war path
+#continoues delivery(5th and 6th step)
+this step in combine to run two projects
+deployment---->post buld action--archive artifact
+                                 **/*.war--save
+deployment--->post build action--build other project
+                                 testing---save
+testing--->build steps--execute shell
+                        java -jar paste path of 4th step consoul/testing.jar----save
+testing--->build steps--copy atifact
+                        deployment--save
+testing--->post build action--deploy war select
+                              **/*.war
+                              prodapp
+                              tomcat9x
+                              add--user&passwd on the file tomcat-users.xml
+                              http://prodip:8080---save
+build now on deployment--->5th and 6th step sucessfully run in at a time in two projects                             
+                  
